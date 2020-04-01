@@ -9,7 +9,7 @@ namespace Microsoft.Quantum.Samples.SimpleGrover
         static void Main(string[] args)
         {
             var sim = new QuantumSimulator();
-            var nDatabaseQubits = 5;
+            var nDatabaseQubits = 7;
 
             var result = SearchForMarkedInput.Run(sim, nDatabaseQubits).Result;
             Console.WriteLine($"Result: {result}");
