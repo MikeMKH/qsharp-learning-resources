@@ -4,12 +4,6 @@
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Measurement;
     
-    operation Set(desired : Result, q1 : Qubit) : Unit {
-        if (desired != M(q1)) {
-            X(q1);
-        }
-    }
-    
     operation Teleport(msg : Qubit, there : Qubit) : Unit {
         using (here = Qubit()) {
             H(here);
@@ -21,6 +15,8 @@
             // Measure out the entanglement
             if (M(msg) == One)  { Z(there); }
             if (M(here) == One) { X(there); }
+            
+            Reset(here);
         }
     }
     
@@ -39,9 +35,7 @@
             // Check what message was sent.
             let result = MResetZ(target) == One;
             
-            
-            Set(Zero, target);
-            Set(Zero, msg);
+            ResetAll([target, msg]);
             
             return result;
         }
